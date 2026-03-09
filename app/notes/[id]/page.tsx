@@ -6,12 +6,15 @@ interface NoteDetailsPageProps {
   params: { id: string; };
 }
 
-export default async function NoteDetailsPage({ params }: NoteDetailsPageProps) {
+export default async function NoteDetailsPage(props: NoteDetailsPageProps) {
+  
+  const awaitedParams: {id: string} = await Promise.resolve(props.params);
+
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["note", params.id],
-    queryFn: () => fetchNoteById(params.id),
+    queryKey: ["note", awaitedParams.id],
+    queryFn: () => fetchNoteById(awaitedParams.id),
   });
 
   return (
