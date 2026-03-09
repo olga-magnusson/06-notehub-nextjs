@@ -13,8 +13,7 @@ export default async function NotesPage(){
         queryKey: ["notes", page, search],
         queryFn: () => fetchNotes(page, perPage, search),
     });
-    return 
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    return <HydrationBoundary state={dehydrate(queryClient)}>
         <NotesClient />
     </HydrationBoundary>;
 }
